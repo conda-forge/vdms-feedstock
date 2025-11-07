@@ -1,5 +1,5 @@
 {% set name = "vdms" %}
-{% set version = "0.0.18" %}
+{% set version = "0.0.22" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/vdms-{{ version }}.tar.gz
-  sha256: 8da315ee89c718a7773ddbd19986b716ccf4e7574c15e70a98d6433221fae8da
+  sha256: 4d59fedd914a645fb8a42c504c9535131f9de9a435b5add00900a2abade50036
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -21,7 +21,7 @@ requirements:
     - setuptools
   run:
     - python >={{ python_min }},<4.0
-    - protobuf ==3.20.3
+    - protobuf ==5.29.5
 
 test:
   imports:
