@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: vdms
+  version: "0.0.23"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/vdms-${{ version }}.tar.gz
+  sha256: 2dec153f8cb33f27cdb9ab33125198195fd29a6777cf890fc735774ed9327874
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }},<4.0
+    - protobuf >=5.29.6,<6
+
+tests:
+  - python:
+      imports:
+        - vdms
+      pip_check: true
+      python_version: ${{ python_min }}
+
+about:
+  summary: VDMS Client Module
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/IntelLabs/vdms
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
